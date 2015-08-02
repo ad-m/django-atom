@@ -22,6 +22,9 @@ cwd = os.getcwd()
 parent = os.path.dirname(cwd)
 sys.path.append(parent)
 
+from django.conf import settings
+settings.configure()
+
 import atom
 
 # -- General configuration -----------------------------------------------------
