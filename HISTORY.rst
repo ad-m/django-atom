@@ -7,3 +7,11 @@ History
 ++++++++++++++++++
 
 * First release on PyPI.
+
+0.2.0 (2015-08-04)
++++++++++++++++++
+
+* Added AutocompleteChoiceFilter
+* Add CSS-class settings for CrispyFormFilter
+* Drop strict requirements for django-tinycontent
+
