@@ -5,7 +5,6 @@ from crispy_forms.layout import Submit, Reset
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy as _l
 from django.forms.models import BaseInlineFormSet
-from tinycontent.models import TinyContent
 
 
 class FormsetHelper(FormHelper):
@@ -77,6 +76,7 @@ class AuthorMixin(object):
 
 class GIODOMixin(object):
     def __init__(self, *args, **kwargs):
+        from tinycontent.models import TinyContent
         super(GIODOMixin, self).__init__(*args, **kwargs)
         self.fields['giodo'] = forms.BooleanField(required=True)
         try:
