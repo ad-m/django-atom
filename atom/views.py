@@ -2,7 +2,10 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.forms.models import inlineformset_factory
 from django.utils.translation import ugettext as _
+from django.utils.encoding import force_text
+from django.core.exceptions import ImproperlyConfigured
 from .forms import BaseTableFormSet
+from django.views.generic.detail import SingleObjectTemplateResponseMixin, BaseDetailView
 
 
 class FormInitialMixin(object):
@@ -12,14 +15,17 @@ class FormInitialMixin(object):
         return initial
 
 
-class DeleteMessageMixin(object):
+class MessageMixin(object):
     success_message = None
-    hide_field = None
 
     def get_success_message(self):
         if self.success_message is None:
             raise NotImplementedError("Provide success_message or get_success_message")
         return self.success_message.format(**self.object.__dict__)
+
+
+class DeleteMessageMixin(object):
+    hide_field = None
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -31,6 +37,45 @@ class DeleteMessageMixin(object):
             self.object.delete()
         messages.add_message(request, messages.SUCCESS, self.get_success_message())
         return HttpResponseRedirect(success_url)
+
+
+class ActionMixin(object):
+    success_url = None
+
+    def action(self):
+        raise ImproperlyConfigured("No action to do. Provide a action body.")
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.action()
+        return HttpResponseRedirect(success_url)
+
+    def get_success_url(self):
+        if self.success_url:
+            self.success_url = force_text(self.success_url)
+            return self.success_url.format(**self.object.__dict__)
+        else:
+            raise ImproperlyConfigured(
+                "No URL to redirect to. Provide a success_url.")
+
+
+class BaseActionView(ActionMixin, BaseDetailView):
+    """
+    Base view for action on an object.
+    Using this base class requires subclassing to provide a response mixin.
+    """
+
+
+class ActionView(SingleObjectTemplateResponseMixin, BaseActionView):
+    template_name_suffix = '_action'
+
+
+class ActionMessageMixin(MessageMixin):
+    def post(self, request, *args, **kwargs):
+        response = super(ActionMessageMixin, self).post(request, *args, **kwargs)
+        messages.add_message(request, messages.SUCCESS, self.get_success_message())
+        return response
 
 
 class FormSetMixin(object):
@@ -71,10 +116,16 @@ class FormSetMixin(object):
     def formset_invalid(self, form, formset):
         return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
+    def get_formset_kwargs(self):
+        return {}
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         FormSet = self.get_formset()
-        formset = FormSet(self.request.POST or None, self.request.FILES, instance=self.object)
+        formset = FormSet(self.request.POST or None,
+            self.request.FILES,
+            instance=self.object,
+            **self.get_formset_kwargs())
 
         if formset.is_valid():
             self.object.save()
