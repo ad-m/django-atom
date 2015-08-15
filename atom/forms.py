@@ -33,18 +33,20 @@ class HelperMixin(object):
 
 
 class SingleButtonMixin(HelperMixin):
-    action_text = _l('Save')
     form_helper_cls = FormHelper
+
+    @property
+    def action_text(self):
+        return _('Update') if hasattr(self, 'instance') and self.instance.pk else _('Save')
 
     def __init__(self, *args, **kwargs):
         super(SingleButtonMixin, self).__init__(*args, **kwargs)
         self.helper.add_input(Submit('action', self.action_text, css_class="btn-primary"))
 
 
-class SaveButtonMixin(HelperMixin):
+class SaveButtonMixin(SingleButtonMixin):
     def __init__(self, *args, **kwargs):
         super(SaveButtonMixin, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('save_changes', _('Update'), css_class="btn-primary"))
         self.helper.add_input(Reset('reset', _('Reset!')))
 
 
