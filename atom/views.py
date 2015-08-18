@@ -27,6 +27,10 @@ class MessageMixin(object):
 class DeleteMessageMixin(object):
     hide_field = None
 
+    def get_success_message(self):
+        return _("{verbose_name} {object} deleted!").format(object=self.object,
+            verbose_name=self.model._meta.verbose_name)
+
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         success_url = self.get_success_url()
@@ -132,3 +136,15 @@ class FormSetMixin(object):
             return self.formset_valid(form, formset)
         else:
             return self.formset_invalid(form, formset)
+
+
+class CreateMessageMixin(object):
+    def get_form_valid_message(self):
+        return _("{verbose_name} {object} created!").format(object=self.object,
+            verbose_name=self.model._meta.verbose_name)
+
+
+class UpdateMessageMixin(object):
+    def get_form_valid_message(self):
+        return _("{verbose_name} {object} updated!").format(object=self.object,
+            verbose_name=self.model._meta.verbose_name)

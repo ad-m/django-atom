@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atom 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-14 21:13+0000\n"
-"PO-Revision-Date: 2015-08-14 23:13+0100\n"
+"POT-Creation-Date: 2015-08-16 02:01+0000\n"
+"PO-Revision-Date: 2015-08-16 04:01+0100\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language: pl_PL\n"
@@ -51,7 +51,22 @@ msgstr "Załącznik"
 msgid "Attachments"
 msgstr "Załączniki"
 
-#: views.py:103
+#: views.py:31
+#, python-brace-format
+msgid "{verbose_name} {object} deleted!"
+msgstr "{verbose_name} {object} usunięto!"
+
+#: views.py:107
 #, python-brace-format
 msgid "{0} created!"
 msgstr "{0} utworzony!"
+
+#: views.py:143
+#, python-brace-format
+msgid "{verbose_name} {object} created!"
+msgstr "{verbose_name} {object} utworzono!"
+
+#: views.py:149
+#, python-brace-format
+msgid "{verbose_name} {object} updated!"
+msgstr "{verbose_name} {object} zaktualizowano!"
