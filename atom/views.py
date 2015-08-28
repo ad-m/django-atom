@@ -1,14 +1,16 @@
-from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.forms.models import inlineformset_factory
-from django.utils.translation import ugettext as _
-from django.utils.encoding import force_text
 from django.core.exceptions import ImproperlyConfigured
+from django.forms.models import inlineformset_factory
+from django.http import HttpResponseRedirect
+from django.utils.encoding import force_text
+from django.utils.translation import ugettext as _
+from django.views.generic.detail import BaseDetailView, SingleObjectTemplateResponseMixin
+
 from .forms import BaseTableFormSet
-from django.views.generic.detail import SingleObjectTemplateResponseMixin, BaseDetailView
 
 
 class FormInitialMixin(object):
+
     def get_initial(self, *args, **kwargs):
         initial = super(FormInitialMixin, self).get_initial(*args, **kwargs)
         initial.update(self.request.GET.dict())
@@ -28,8 +30,8 @@ class DeleteMessageMixin(object):
     hide_field = None
 
     def get_success_message(self):
-        return _("{verbose_name} {object} deleted!").format(object=self.object,
-            verbose_name=self.model._meta.verbose_name)
+        template = dict(object=self.object, verbose_name=self.model._meta.verbose_name)
+        return _("{verbose_name} {object} deleted!").format(**template)
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -76,6 +78,7 @@ class ActionView(SingleObjectTemplateResponseMixin, BaseActionView):
 
 
 class ActionMessageMixin(MessageMixin):
+
     def post(self, request, *args, **kwargs):
         response = super(ActionMessageMixin, self).post(request, *args, **kwargs)
         messages.add_message(request, messages.SUCCESS, self.get_success_message())
@@ -96,7 +99,8 @@ class FormSetMixin(object):
 
     def get_formset(self):
         return self.formset or inlineformset_factory(self.model, self.inline_model,
-            form=self.inline_form_cls, formset=self.formset_cls)
+                                                     form=self.inline_form_cls,
+                                                     formset=self.formset_cls)
 
     def get_context_data(self, **kwargs):
         context = super(FormSetMixin, self).get_context_data(**kwargs)
@@ -127,9 +131,9 @@ class FormSetMixin(object):
         self.object = form.save(commit=False)
         FormSet = self.get_formset()
         formset = FormSet(self.request.POST or None,
-            self.request.FILES,
-            instance=self.object,
-            **self.get_formset_kwargs())
+                          self.request.FILES,
+                          instance=self.object,
+                          **self.get_formset_kwargs())
 
         if formset.is_valid():
             self.object.save()
@@ -139,12 +143,14 @@ class FormSetMixin(object):
 
 
 class CreateMessageMixin(object):
+
     def get_form_valid_message(self):
-        return _("{verbose_name} {object} created!").format(object=self.object,
-            verbose_name=self.model._meta.verbose_name)
+        template = dict(object=self.object, verbose_name=self.model._meta.verbose_name)
+        return _("{verbose_name} {object} created!").format(**template)
 
 
 class UpdateMessageMixin(object):
+
     def get_form_valid_message(self):
-        return _("{verbose_name} {object} updated!").format(object=self.object,
-            verbose_name=self.model._meta.verbose_name)
+        template = dict(object=self.object, verbose_name=self.model._meta.verbose_name)
+        return _("{verbose_name} {object} updated!").format(**template)

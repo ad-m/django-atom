@@ -1,10 +1,11 @@
 from functools import partial
-from django import forms
+
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Reset
+from crispy_forms.layout import Reset, Submit
+from django import forms
+from django.forms.models import BaseInlineFormSet
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy as _l
-from django.forms.models import BaseInlineFormSet
 
 
 class FormsetHelper(FormHelper):
@@ -13,12 +14,14 @@ class FormsetHelper(FormHelper):
 
 
 class TableFormSetHelper(FormsetHelper):
+
     def __init__(self, *args, **kwargs):
         super(TableFormSetHelper, self).__init__(*args, **kwargs)
         self.template = 'bootstrap/table_inline_formset.html'
 
 
 class BaseTableFormSet(BaseInlineFormSet):
+
     def __init__(self, *args, **kwargs):
         super(BaseTableFormSet, self).__init__(*args, **kwargs)
         self.helper = TableFormSetHelper()
@@ -45,12 +48,14 @@ class SingleButtonMixin(HelperMixin):
 
 
 class SaveButtonMixin(SingleButtonMixin):
+
     def __init__(self, *args, **kwargs):
         super(SaveButtonMixin, self).__init__(*args, **kwargs)
         self.helper.add_input(Reset('reset', _('Reset!')))
 
 
 class FormHorizontalMixin(HelperMixin):
+
     def __init__(self, *args, **kwargs):
         super(FormHorizontalMixin, self).__init__(*args, **kwargs)
         self.helper.form_class = 'form-horizontal'
@@ -59,12 +64,14 @@ class FormHorizontalMixin(HelperMixin):
 
 
 class PartialMixin(object):
+
     @classmethod
     def partial(cls, *args, **kwargs):
         return partial(cls, *args, **kwargs)
 
 
 class AuthorMixin(object):
+
     def save(self, commit=True, *args, **kwargs):
         obj = super(AuthorMixin, self).save(commit=False, *args, **kwargs)
         if obj.pk:  # update
@@ -77,6 +84,7 @@ class AuthorMixin(object):
 
 
 class GIODOMixin(object):
+
     def __init__(self, *args, **kwargs):
         from tinycontent.models import TinyContent
         super(GIODOMixin, self).__init__(*args, **kwargs)
