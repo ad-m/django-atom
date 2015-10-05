@@ -40,11 +40,13 @@ class SingleButtonMixin(HelperMixin):
 
     @property
     def action_text(self):
-        return _('Update') if hasattr(self, 'instance') and self.instance.pk else _('Save')
+        return _('Update') if (hasattr(self, 'instance') and
+                               self.instance.pk) else _('Save'
 
     def __init__(self, *args, **kwargs):
         super(SingleButtonMixin, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('action', self.action_text, css_class="btn-primary"))
+        self.helper.add_input(
+            Submit('action', self.action_text, css_class="btn-primary"))
 
 
 class SaveButtonMixin(SingleButtonMixin):
