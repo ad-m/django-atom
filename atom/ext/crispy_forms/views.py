@@ -1,9 +1,11 @@
-from django.forms.models import inlineformset_factory
-from django.utils.translation import ugettext as _
 from __future__ import absolute_import
-from .main import BaseTableFormSet
-from django.http import HttpResponseRedirect
+
 from django.contrib import messages
+from django.forms.models import inlineformset_factory
+from django.http import HttpResponseRedirect
+from django.utils.translation import ugettext as _
+
+from .main import BaseTableFormSet
 
 
 class FormSetMixin(object):

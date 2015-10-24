@@ -1,8 +1,9 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Reset
+from crispy_forms.layout import Reset, Submit
+from django.forms import BaseFormSet
+from django.forms.models import BaseInlineFormSet
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy as _l
-from django.forms.models import BaseInlineFormSet
 
 
 class FormsetHelper(FormHelper):
@@ -11,9 +12,21 @@ class FormsetHelper(FormHelper):
 
 
 class TableFormSetHelper(FormsetHelper):
+    template = 'bootstrap/table_inline_formset.html'
+
+
+class TableFormSetMixin(object):
     def __init__(self, *args, **kwargs):
-        super(TableFormSetHelper, self).__init__(*args, **kwargs)
-        self.template = 'bootstrap/table_inline_formset.html'
+        super(InlineTableFormSet, self).__init__(*args, **kwargs)
+        self.helper = TableFormSetHelper()
+
+
+class InlineTableFormSet(TableFormSetMixin, BaseInlineFormSet):
+    pass
+
+
+class TableFormSet(TableFormSetMixin, BaseFormSet):
+    pass
 
 
 class BaseTableFormSet(BaseInlineFormSet):
@@ -31,19 +44,15 @@ class HelperMixin(object):
 
 
 class SingleButtonMixin(HelperMixin):
-    action_text = _l('Save')
     form_helper_cls = FormHelper
+
+    @property
+    def action_text(self):
+        return _('Update') if hasattr(self, 'instance') and self.instance.pk else _('Save')
 
     def __init__(self, *args, **kwargs):
         super(SingleButtonMixin, self).__init__(*args, **kwargs)
         self.helper.add_input(Submit('action', self.action_text, css_class="btn-primary"))
-
-
-class SaveButtonMixin(HelperMixin):
-    def __init__(self, *args, **kwargs):
-        super(SaveButtonMixin, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('save_changes', _('Update'), css_class="btn-primary"))
-        self.helper.add_input(Reset('reset', _('Reset!')))
 
 
 class FormHorizontalMixin(HelperMixin):

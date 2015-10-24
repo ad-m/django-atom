@@ -1,6 +1,6 @@
-from autocomplete_light.registry import registry
-from autocomplete_light import ChoiceWidget
 import django_filters
+from autocomplete_light import ChoiceWidget
+from autocomplete_light.registry import registry
 
 
 class AutocompleteChoiceFilter(django_filters.ModelChoiceFilter):

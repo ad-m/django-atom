@@ -3,7 +3,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseRedirect
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _
-from django.views.generic.detail import BaseDetailView, SingleObjectTemplateResponseMixin
+from django.views.generic.detail import (BaseDetailView,
+                                         SingleObjectTemplateResponseMixin)
 
 
 class FormInitialMixin(object):
