@@ -19,3 +19,8 @@ History
 +++++++++++++++++
 
 * Split class to independent package to resolve dependencies issues
+
+0.6.0 (2015-10-25)
++++++++++++++++++
+
+* A lot
