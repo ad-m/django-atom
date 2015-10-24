@@ -5,7 +5,7 @@ from django.forms.models import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
 
-from .main import BaseTableFormSet
+from .forms import BaseTableFormSet
 
 
 class FormSetMixin(object):
