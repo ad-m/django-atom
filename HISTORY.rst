@@ -24,3 +24,9 @@ History
 +++++++++++++++++
 
 * A lot
+
+0.10.0(2015-11-21)
++++++++++++++++++
+
+* Add asci_slugifier
+* Add absolute_import to crispy_forms
