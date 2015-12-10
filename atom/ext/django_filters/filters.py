@@ -23,13 +23,12 @@ class CrispyFilterMixin(object):
 class AutocompleteChoiceFilter(django_filters.ModelChoiceFilter):
 
     def __init__(self, autocomplete_name, *args, **kwargs):
-        from autocomplete_light.registry import registry
-        from autocomplete_light import ChoiceWidget
-        autocomplete = registry.get_autocomplete_from_arg(autocomplete_name)
+        from autocomplete_light import shortcuts as autocomplete_light
+        autocomplete = autocomplete_light.registry.get_autocomplete_from_arg(autocomplete_name)
         if 'label' not in kwargs:
             kwargs['label'] = autocomplete.model._meta.verbose_name
         kwargs['queryset'] = autocomplete.choices
-        kwargs['widget'] = ChoiceWidget(autocomplete)
+        kwargs['widget'] = autocomplete_light.ChoiceWidget(autocomplete)
         super(AutocompleteChoiceFilter, self).__init__(*args, **kwargs)
 
 

@@ -25,8 +25,13 @@ History
 
 * A lot
 
-0.10.0(2015-11-21)
+0.10.0 (2015-11-21)
 +++++++++++++++++
 
 * Add asci_slugifier
 * Add absolute_import to crispy_forms
+
+0.11.0 (2015-12-10)
++++++++++++++++++
+
+* Fix support of dj19 by autocomplete_light API changes
