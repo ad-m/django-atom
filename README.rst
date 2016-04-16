@@ -26,13 +26,15 @@ Then use it in a project::
 
     import atom
 
-Features
---------
+Extensions
+----------
 
-* TODO
+slugify
+######
+Example usage in ```settings````.py add
 
-Cookiecutter Tools Used in Making This Package
-----------------------------------------------
+.. code:: python
 
-*  cookiecutter
-*  cookiecutter-djangopackage
+ AUTOSLUG_SLUGIFY_FUNCTION = 'atom.ext.slugify.slugifier.ascii_slugify'
+    
+Required ```unicode-slugify```, ```django-autoslug```.
