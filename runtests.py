@@ -1,36 +1,15 @@
+import os
 import sys
 
 try:
-    from django.conf import settings
+    import django
     from django.test.utils import get_runner
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'testapp.settings'
+    django.setup()
 
-    settings.configure(
-        DEBUG=True,
-        USE_TZ=True,
-        DATABASES={
-            "default": {
-                "ENGINE": "django.db.backends.sqlite3",
-            }
-        },
-        ROOT_URLCONF="atom.urls",
-        INSTALLED_APPS=[
-            "django.contrib.auth",
-            "django.contrib.contenttypes",
-            "django.contrib.sites",
-            "atom",
-        ],
-        SITE_ID=1,
-        MIDDLEWARE_CLASSES=(),
-    )
-
-    try:
-        import django
-        setup = django.setup
-    except AttributeError:
-        pass
-    else:
-        setup()
-
+    import atom.ext.autocomplete_light.filters
+    import atom.ext.guardian.tests
+    from django.conf import settings
 except ImportError:
     import traceback
     traceback.print_exc()

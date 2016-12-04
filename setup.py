@@ -38,6 +38,8 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
+        'django-filter'
+        'django-guardian'
     ],
     license="BSD",
     zip_safe=False,

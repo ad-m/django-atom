@@ -1,6 +1,5 @@
 from guardian.shortcuts import assign_perm
 from django.core.exceptions import ImproperlyConfigured
-from feder.users.factories import UserFactory
 
 
 class PermissionStatusMixin(object):
@@ -9,11 +8,11 @@ class PermissionStatusMixin(object):
     Require user with username='john' and password='pass'
 
     Attributes:
-        permission (TYPE): Description
+        permission (list): Description
         status_anonymous (int): Status code for anonymouser
         status_has_permission (int): Status code for user with permission
         status_no_permission (403): Status code for user without permission
-        url (TYPE): url to test
+        url (string): url to test
     """
     url = None
     permission = None
@@ -23,7 +22,6 @@ class PermissionStatusMixin(object):
 
     def setUp(self):
         super(PermissionStatusMixin, self).setUp()
-        self.user = getattr(self, 'user', UserFactory(username='john'))
 
     def get_url(self):
         """Get url to tests
