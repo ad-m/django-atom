@@ -12,8 +12,8 @@ deploy:
 install: pip install -r requirements-test.txt
 language: python
 python:
-- '3.3'
 - '2.7'
-- '2.6'
+- '3.4'
+- '3.5'
 script: coverage run --source atom runtests.py
 user: adobrawy
