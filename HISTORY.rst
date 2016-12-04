@@ -35,3 +35,8 @@ History
 +++++++++++++++++
 
 * Fix support of dj19 by autocomplete_light API changes
+
+0.12.0 (2016-12-4)
+++++++++++++++++++
+
+* Add ``atom.ext.guardian.tests.PermissionStatusMixin``
