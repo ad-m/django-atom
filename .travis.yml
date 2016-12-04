@@ -2,7 +2,8 @@
 after_success: coveralls
 deploy:
   true:
-    condition: $TOXENV == py27
+    branch: master
+    python: '2.7'
     repo: ad-m/django-atom
     tags: true
   distributions: sdist bdist_wheel
