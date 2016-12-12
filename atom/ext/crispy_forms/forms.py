@@ -37,6 +37,7 @@ class BaseTableFormSet(BaseInlineFormSet):
 
 
 class HelperMixin(object):
+
     form_helper_cls = FormHelper
 
     def __init__(self, *args, **kwargs):
@@ -45,10 +46,35 @@ class HelperMixin(object):
 
 
 class SingleButtonMixin(HelperMixin):
-    form_helper_cls = FormHelper
+    """Dynamically add crispy button to form layout
+
+    Example
+    -------
+    Usage of mixins is obvious::
+
+        from django import forms
+        from atom.ext.crispy_forms.forms.SingleButtonMixin
+
+        class PersonModelForm(SingleButtonMixin, forms.ModelForm):
+
+            class Meta:
+                model = Person
+
+    Extends
+    -------
+    HelperMixin
+    """
 
     @property
     def action_text(self):
+        """A text of added action submit button.
+
+        In standards it detects when forms save or update objects
+
+        Returns
+        -------
+        string -- A text used in button
+        """
         return _('Update') if hasattr(self, 'instance') and self.instance.pk else _('Save')
 
     def __init__(self, *args, **kwargs):

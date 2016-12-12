@@ -15,6 +15,7 @@ Contents:
    installation
    usage
    ext/guardian
+   ext/crispy_forms
    contributing
    authors
    history
