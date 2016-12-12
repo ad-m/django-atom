@@ -53,7 +53,7 @@ class SingleButtonMixin(HelperMixin):
     Usage of mixins is obvious::
 
         from django import forms
-        from atom.ext.crispy_forms.forms.SingleButtonMixin
+        from atom.ext.crispy_forms.forms import SingleButtonMixin
 
         class PersonModelForm(SingleButtonMixin, forms.ModelForm):
 
