@@ -40,3 +40,9 @@ History
 ++++++++++++++++++
 
 * Add ``atom.ext.guardian.tests.PermissionStatusMixin``
+
+
+0.12.8 (2016-12-16)
++++++++++++++++++++
+
+* Mark code as Python 3 compatible
