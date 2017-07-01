@@ -57,5 +57,9 @@ History
 
 * Add base class validation in ``atom.mixins.AdminTestCaseMixin``
 
+0.14.2 (2017-06-2)
+++++++++++++++++++
+
+* Fix username and message in ``atom.mixins.AdminTestCaseMixin``
 
 
