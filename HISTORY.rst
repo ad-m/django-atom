@@ -57,9 +57,16 @@ History
 
 * Add base class validation in ``atom.mixins.AdminTestCaseMixin``
 
-0.14.2 (2017-06-2)
+0.14.2 (2017-06-1)
 ++++++++++++++++++
 
 * Fix username and message in ``atom.mixins.AdminTestCaseMixin``
+
+0.14.3 (2017-06-1
++++++++++++++++++
+
+* Fix django 1.8-1.9 compatibility of ``atom.mixins``
+
+
 
 

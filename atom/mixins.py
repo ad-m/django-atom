@@ -1,7 +1,9 @@
-import unittest
-
 from django.core.exceptions import ImproperlyConfigured
-from django.urls import reverse
+
+try:
+    from django.urls import reverse  # Django 1.10+
+except ImportError:  # Django 1.9
+    from django.core.urlresolvers import reverse
 
 
 class AdminTestCaseMixin(object):
