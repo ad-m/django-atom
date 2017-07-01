@@ -9,30 +9,30 @@ History
 * First release on PyPI.
 
 0.2.0 (2015-08-04)
-+++++++++++++++++
+++++++++++++++++++
 
 * Added AutocompleteChoiceFilter
 * Add CSS-class settings for CrispyFormFilter
 * Drop strict requirements for django-tinycontent
 
 0.3.0 (2015-08-04)
-+++++++++++++++++
+++++++++++++++++++
 
 * Split class to independent package to resolve dependencies issues
 
 0.6.0 (2015-10-25)
-+++++++++++++++++
+++++++++++++++++++
 
 * A lot
 
 0.10.0 (2015-11-21)
-+++++++++++++++++
++++++++++++++++++++
 
 * Add asci_slugifier
 * Add absolute_import to crispy_forms
 
 0.11.0 (2015-12-10)
-+++++++++++++++++
++++++++++++++++++++
 
 * Fix support of dj19 by autocomplete_light API changes
 
@@ -51,3 +51,11 @@ History
 ++++++++++++++++++
 
 * Add ``atom.mixins.AdminTestCaseMixin``
+
+0.14.1 (2017-06-1)
+++++++++++++++++++
+
+* Add base class validation in ``atom.mixins.AdminTestCaseMixin``
+
+
+

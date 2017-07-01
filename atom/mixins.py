@@ -1,3 +1,5 @@
+import unittest
+
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse
 
@@ -51,6 +53,10 @@ class AdminTestCaseMixin(object):
         return self.factory_cls
 
     def setUp(self):
+        if not hasattr(self, 'assertNumQueriesLessThan'):
+            self.skipTest("{0} is missing a {0}.assertNumQueriesLessThan method. "
+                          "Use test_plus.test.TestCase as base class.".format(self.__class__.__name__))
+
         self.object = self.factory_cls()
         self.user = self.user_factory_cls(is_superuser=True,
                                           is_staff=True)
