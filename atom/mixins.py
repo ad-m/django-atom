@@ -56,31 +56,31 @@ class AdminTestCaseMixin(object):
         if not hasattr(self, 'assertNumQueriesLessThan'):
             self.skipTest("{0} is missing a {0}.assertNumQueriesLessThan method. "
                           "Use test_plus.test.TestCase as base class.".format(self.__class__.__name__))
-
         self.object = self.factory_cls()
-        self.user = self.user_factory_cls(is_superuser=True,
+        self.user = self.user_factory_cls(password='password',
+                                          is_superuser=True,
                                           is_staff=True)
-        self.client.login(username=self.user, password='pass')
+        self.client.login(username=self.user.username, password='password')
 
     def test_status_changelist(self):
         url = reverse(self.get_changelist_viewname())
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, "Invalid status code on '{}'".format(url))
 
     def test_status_change_view(self):
         url = reverse(self.get_change_viewname(), args=[self.object.pk])
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, "Invalid status code on '{}'".format(url))
 
     def test_status_delete_view(self):
         url = reverse(self.get_delete_viewname(), args=[self.object.pk])
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, "Invalid status code on '{}'".format(url))
 
     def test_status_history_view(self):
         url = reverse(self.get_history_viewname(), args=[self.object.pk])
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, "Invalid status code on '{}'".format(url))
 
     def test_changelist_queries_limit(self):
         self.factory_cls.create_batch(size=20)
