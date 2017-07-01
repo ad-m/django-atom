@@ -46,3 +46,8 @@ History
 +++++++++++++++++++
 
 * Mark code as Python 3 compatible
+
+0.14.0 (2017-06-1)
+++++++++++++++++++
+
+* Add ``atom.mixins.AdminTestCaseMixin``

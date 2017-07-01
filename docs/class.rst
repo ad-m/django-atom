@@ -28,3 +28,10 @@ Views
 .. automodule:: atom.views
     :members:
     :undoc-members:
+
+Mixins
+------------------
+
+.. automodule:: atom.mixins
+    :members:
+    :undoc-members:
