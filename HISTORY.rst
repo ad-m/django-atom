@@ -62,11 +62,14 @@ History
 
 * Fix username and message in ``atom.mixins.AdminTestCaseMixin``
 
-0.14.3 (2017-06-1
-+++++++++++++++++
+0.14.3 (2017-06-1)
+++++++++++++++++++
 
 * Fix django 1.8-1.9 compatibility of ``atom.mixins``
 
+0.15.0 (2017-07-21)
++++++++++++++++++++
 
-
-
+* Add management command ``generate_factory``, ``generate_routers``, ``generate_serializers``, ``generate_viewsets``, ``generate_viewsets_tests``
+* Add serializer ``atom.ext.contenttypes.ContentTypeSerializer`` , ``atom.ext.sites.serializer.SiteSerializer``
+* Add mixin ``atom.ext.rest_framework.ViewSetTestCaseMixin``
