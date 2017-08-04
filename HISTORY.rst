@@ -73,3 +73,8 @@ History
 * Add management command ``generate_factory``, ``generate_routers``, ``generate_serializers``, ``generate_viewsets``, ``generate_viewsets_tests``
 * Add serializer ``atom.ext.contenttypes.ContentTypeSerializer`` , ``atom.ext.sites.serializer.SiteSerializer``
 * Add mixin ``atom.ext.rest_framework.ViewSetTestCaseMixin``
+
+0.16.0 (2017-08-4)
+++++++++++++++++++
+
+* Fix management commands import
