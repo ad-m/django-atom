@@ -30,7 +30,8 @@ Extensions
 ----------
 
 slugify
-######
+#######
+
 Example usage in ``settings.py`` add
 
 .. code:: python
