@@ -88,3 +88,9 @@ History
 ##################
 
 * Fix HISTORY.rst format
+
+0.16.0 (2017-09-23)
+###################
+
+* Add ``atom.ext.guardian.views.RaisePermissionRequiredMixin``
+* Add ``atom.ext.guardian.views.AttrPermissionRequiredMixin``
