@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.mixins import LoginRequiredMixin  # django.contrib.auth.mixins lack of redirect_unauthenticated_users
 from guardian.mixins import PermissionRequiredMixin
 
 
