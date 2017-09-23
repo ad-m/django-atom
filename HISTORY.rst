@@ -94,3 +94,8 @@ History
 
 * Add ``atom.ext.guardian.views.RaisePermissionRequiredMixin``
 * Add ``atom.ext.guardian.views.AttrPermissionRequiredMixin``
+
+0.16.1 (2017-09-24)
+##################
+
+* Fix ``redirect_unauthenticated_users`` support in ``atom.ext.guardian.views``
